@@ -1,10 +1,18 @@
+/* =========================
+   CSS COMPLETO (styles.css)
+   ========================= */
+
+/* —— Variables de color —— */
 :root {
   --red: #e60023;
   --black: #1e1e1e;
   --gray-light: #f0f4f8;
+  /* Versión RGB para usar en rgba() */
+  --red-rgb: 230, 0, 35;
+  --black-rgb: 30, 30, 30;
 }
 
-/* Fondo animado */
+/* —— Fondo animado principal —— */
 body {
   background:
     radial-gradient(circle at 15% 20%, var(--red) 0%, transparent 40%),
@@ -17,21 +25,20 @@ body {
   color: #333;
 }
 @keyframes bgMove {
-  to {
-    background-position: 30% 40%, 70% 60%;
-  }
+  to { background-position: 30% 40%, 70% 60%; }
 }
 
-/* Secciones con burbujas flotantes */
+/* —— Estilo general de secciones —— */
 section {
   position: relative;
   z-index: 1;
   background: rgba(255,255,255,0.93);
-  margin-bottom: 2rem;
+  margin: 2rem auto;
   border-radius: 18px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   overflow: hidden;
   padding: 2rem 1rem;
+  max-width: 1000px;
 }
 section::before, section::after {
   content: "";
@@ -42,19 +49,21 @@ section::before, section::after {
 section::before {
   width: 120px; height: 120px;
   background: var(--red);
-  top: -40px; left: -40px; opacity: 0.12;
+  top: -40px; left: -40px;
+  opacity: 0.12;
   animation: float 9s infinite alternate;
 }
 section::after {
   width: 90px; height: 90px;
   background: var(--black);
-  bottom: -30px; right: -30px; opacity: 0.07;
+  bottom: -30px; right: -30px;
+  opacity: 0.07;
   animation: float2 12s infinite alternate;
 }
 @keyframes float { to { top: 30px; left: 30px; } }
 @keyframes float2 { to { bottom: 20px; right: 10px; } }
 
-/* Navegación */
+/* —— Navegación —— */
 nav {
   background: var(--black);
   display: flex;
@@ -72,31 +81,32 @@ nav a:hover {
   color: var(--red);
 }
 
-/* Encabezado */
+/* —— Encabezado —— */
 header {
   text-align: center;
   padding: 2.5rem 1rem;
   background: linear-gradient(to right, #fffbe6, #ffe6f0);
 }
 header h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 0.5rem;
+  color: var(--black);
 }
 header p {
   font-size: 1.2rem;
   font-style: italic;
+  color: #555;
 }
 
-/* Línea de tiempo horizontal interactiva */
+/* —— Línea de Tiempo —— */
 #timeline {
   text-align: center;
-  background: transparent;
-  box-shadow: none;
-  padding: 3rem 1rem 2rem 1rem;
+  padding: 3rem 1rem 2rem;
 }
 #timeline h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 2rem;
+  color: var(--black);
 }
 .timeline-container {
   display: flex;
@@ -125,49 +135,58 @@ header p {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: transform 0.25s ease;
-  outline: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   border: none;
+  outline: none;
 }
 #timeline .timeline-event summary:hover,
 #timeline .timeline-event details[open] summary {
-  transform: scale(1.09);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-}
-#timeline .timeline-event details[open] summary {
-  border: 2px solid #fff;
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 }
 #timeline .timeline-event summary .year {
   font-size: 1.25rem;
   margin-bottom: 0.2rem;
 }
 #timeline .timeline-event summary p {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   margin: 0;
 }
-.tl-img {
+.timeline-event .tl-img {
   display: block;
-  margin: 0.5rem auto 0.5rem auto;
+  margin: 0.5rem auto;
   max-width: 160px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/* Quiz */
+/* —— Quiz —— */
+#quiz {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--red-rgb), 0.1) 0%,
+    rgba(var(--black-rgb), 0.1) 100%
+  );
+  padding: 2.5rem 1rem;
+  border-radius: 12px;
+}
 #quiz h2 {
+  color: var(--black);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
 }
 #quiz-container {
   max-width: 700px;
   margin: 0 auto;
 }
 .question {
-  margin: 1.5rem 0;
+  margin-bottom: 1rem;
 }
 .question h3 {
   font-size: 1.2rem;
+  color: var(--black);
 }
 .options {
   display: flex;
@@ -176,28 +195,40 @@ header p {
   justify-content: center;
 }
 .option {
-  background: #fff;
-  border: 2px solid #ccc;
+  background: var(--black);
+  color: var(--gray-light);
+  border: 2px solid var(--red);
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.25s, color 0.25s, transform 0.2s;
   width: calc(50% - 1rem);
   text-align: center;
   font-weight: bold;
 }
 .option:hover {
-  background: #ffe6f0;
-  transform: translateY(-3px);
+  background: var(--red);
+  color: #fff;
+  transform: translateY(-2px);
+}
+#quiz-container h3,
+#quiz-container p {
+  color: var(--black);
+  text-align: center;
 }
 
-/* Audio */
-audio {
-  display: block;
-  margin: 2rem auto;
-  width: 80%;
+/* —— Reproductor de audio —— */
+#song-player {
+  margin-top: 2rem;
 }
-button {
+#song-player label {
+  font-weight: bold;
+  color: var(--black);
+}
+#song-selector {
+  padding: 0.3rem 0.5rem;
+}
+#play-audio-btn {
   font-size: 1rem;
   padding: 0.7em 1.2em;
   border: none;
@@ -205,16 +236,20 @@ button {
   color: #fff;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 1rem;
-  margin-bottom: 1.2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: background 0.25s;
+  margin-left: 0.5rem;
 }
-button:hover {
+#play-audio-btn:hover {
   background: #b9001b;
 }
+audio {
+  display: block;
+  margin: 1.5rem auto 0;
+  width: 80%;
+}
 
-/* Responsive */
+/* —— Responsive —— */
 @media (max-width: 700px) {
   #timeline .timeline-event summary {
     --circle-size: 90px;
@@ -224,5 +259,8 @@ button:hover {
   }
   header h1 {
     font-size: 2rem;
+  }
+  #quiz h2 {
+    font-size: 1.5rem;
   }
 }
